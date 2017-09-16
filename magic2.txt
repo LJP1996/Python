@@ -1,0 +1,74 @@
+_getattr_(self,name):定义当前用户试图获取一个不存在的属性时的行为
+_getattribute_(self,name)：定义当该类的属性被访问时候的行为
+_setattr_(self,name)：定义当一个属性被设置时候的行为
+_delattr_(self,name)：定义当一个属性被删除时候的行为
+_getcttr_(self,name)
+
+
+描述符
+	描述符就是将某种特殊类型的类的实例指派给另一个类的属性
+_get_(self,instance,owner):用于访问属性，它返回属性的值
+_set_(self,instance,owner):将在属性分配操作中调用，不返回任何内容
+_delete_(self,instance):控制删除操作，不返回任何内容
+
+
+例子：
+华氏温度与摄氏温度互相转换:
+class Celsius:
+	def _init_(self,value = 26.0):
+		self.value = float(value)
+	def _get_(self,instance,owener):
+		return self.value
+	sef _set_(self,instance,value):
+		self.value = float(value)
+class Fashrenheit:
+	sef _get_(self,instance,owner):
+		return instance.cel*1.8+32
+	def _set_(self,instance,value):
+		instance.cel = (float(value)-32)/1.8
+class Temperature:
+	cel = Celsius()
+	fsh = Fashrenheir()
+
+容器
+不可变的容器：必须要定义_len_()和_getitem_()方法
+可变的容器：除了定义_len_()和_getitem_()方法，还要定义_settime_()和_delitem_()方法
+
+*args   参数是可变类型，可变数量。
+
+迭代器
+iter():	_iter_()
+next():
+斐波那契数列:
+class Fibs:
+	def _init_(self,n=10):
+		self.a = 0
+		self.b = 0
+		self.n = 10
+	def _iter_(self):
+		return self
+	def _next_(self):
+		self.a,self.b = self.b ,self.a+self.b
+		if self.a>self.n:
+			raise StopIteration
+		return self.a
+fibs =Fibs()
+for each in fibs:
+	print(each)
+
+生成器:
+def libs():
+	a = 0
+	b = 0
+	while True:
+		a,b = b, a+b
+		yield a
+for each in libs():
+	if each >100:
+		break
+
+
+容器-->数据的封装
+函-->数语句的封装
+类-->方法和属性的封装
+模块-->模块就是程序
