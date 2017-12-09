@@ -37,12 +37,10 @@ class Water():
 				waters = waters+left-A[x]
 		right = 0
 		for s in range(n-1,The_max,-1):
-			print(s)
 			if A[s]>right:
 				right =A[s]
 			else:
 				waters = waters+right-A[s]
-		print(waters)
 		return waters		
 	if __name__=='__main__':
 		A=[0,1,0,2,1,0,1,3,2,1,2,1]
